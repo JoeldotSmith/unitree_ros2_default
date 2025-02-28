@@ -29,7 +29,7 @@ git clone https://github.com/JoeldotSmith/unitree_ros2_default
 
 Please connect to the robot via ethernet.
 
-Next, open the network settings, find the network interface that the robot connected.In IPv4 setting, change the IPv4 mode to manual, set the address to 192.168.123.103, and set the mask to 255.255.255.0. After completion, click apply and wait for the network to reconnect.
+Next, open the network settings, find the network interface that the robot connected.In IPv4 setting, change the IPv4 mode to manual, set the address to 192.168.123.103, and set the mask to 255.255.255.0 and the gateway to 192.168.123.30. After completion, click apply and wait for the network to reconnect.
 
 More detailed instructions can be found in the unitree_ros2 repo
 
@@ -60,14 +60,14 @@ export CYCLONEDDS_URI='<CycloneDDS><Domain><General><Interfaces>
 
 Then a create script has been created to make first compiling easier
 
-**PLEASE DO NOT RUN THIS SCRIPT WITHOUT THROUGHLY READING AND UNDERSTANDING WHAT IT DOES**
+**RUNNING A RANDOM SCRIPT WITHOUT THROUGHLY READING AND UNDERSTANDING WHAT IT DOES IS BAD PRACTICE, PLEASE DO SO BEFORE RUNNING**
 
 ```bash
 cd ~/unitree_ros2_default
 ./create.bash
 ```
 
-*This script has not been finalised there may be come errors*
+*This script has not been finalised there may be some errors*
 
 Next source the enviroment with
 
@@ -88,6 +88,12 @@ you should see both
 /unitree_hg
 ```
 in the list.
+
+Now RUNNING
+``` bash
+ros2 launch livox_ros_driver2 rviz_MID360_launch.py
+```
+should open an rviz page after a small wait point cloud information should be seen in the viewer this is the lidar data
 
 
 
