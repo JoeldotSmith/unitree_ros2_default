@@ -41,32 +41,30 @@ to find the name of the connection mine is 'enx00e04c680157' *a wired connection
 
 the inside the unitree_ros2_default/setup.sh file, replace the name in the NetworkInterface in the with the name of your wired connection, like below and save the file.
 ``` bash
+#!/bin/bash
 echo "Setup unitree ros2 environment"
 source /opt/ros/foxy/setup.bash
-echo "Setup unitree cyclonedds_ws"
-source $HOME/unitree_ros2_default/cyclonedds_ws/install/setup.bash
-echo "Setup unitree go/api/hg"
-source $HOME/unitree_ros2_default/install/setup.bash
-echo "Setup unitree ws_livox"
-source $HOME/unitree_ros2_default/ws_livox/install/setup.sh
+echo "Setup unitree unitree workspace"
+source $HOME/unitree_ros2_default/unitree_ws/install/setup.bash
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 export CYCLONEDDS_URI='<CycloneDDS><Domain><General><Interfaces>
                             <NetworkInterface name="enx00e04c680157" priority="default" multicast="default" />
                         </Interfaces></General></Domain></CycloneDDS>'
+
+
 ```
 
 
 ### Compilation
 
-Then a create script has been created to make first compiling easier
+Then a create script has been created to make first compiling easier. This script compiles all dependencies and packages on first running.
 
 **RUNNING A RANDOM SCRIPT WITHOUT THROUGHLY READING AND UNDERSTANDING WHAT IT DOES IS BAD PRACTICE, PLEASE DO SO BEFORE RUNNING**
 
 ```bash
 cd ~/unitree_ros2_default
-./create.bash
+./compile.bash
 ```
-
 *This script has not been finalised there may be some errors*
 
 Next source the enviroment with
@@ -80,7 +78,7 @@ Testing, ros should now be active and if you run
 ```bash
 ros2 pkg list
 ```
-you should see both 
+you should see all in the list of packages 
 ```bash
 /livox_ros_driver2
 /unitree_go
@@ -89,11 +87,20 @@ you should see both
 ```
 in the list.
 
-Now RUNNING
+Example to open up the lidar of the robot in rviz running this
 ``` bash
 ros2 launch livox_ros_driver2 rviz_MID360_launch.py
 ```
-should open an rviz page after a small wait point cloud information should be seen in the viewer this is the lidar data
+should open an rviz page after a small wait point cloud information should be seen in the viewer this is the lidar data.
+
+
+After changing code you will have to recompile the code base by
+``` bash
+cd ~/unitree_ros2_default/unitree_ws
+colcon build
+cd ..
+source setup.sh
+```
 
 
 
