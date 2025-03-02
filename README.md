@@ -16,6 +16,13 @@ The installation of ROS2 foxy can refer to: https://docs.ros.org/en/foxy/Install
 
 The installation of Livox-SDK2 can refer to: https://github.com/Livox-SDK/Livox-SDK2
 
+Dependencies:
+``` bash
+sudo apt install python3-colcon-common-extensions
+sudo apt install ros-foxy-rmw-cyclonedds-cpp
+sudo apt install ros-foxy-rosidl-generator-dds-idl
+
+```
 
 ## Installation
 
