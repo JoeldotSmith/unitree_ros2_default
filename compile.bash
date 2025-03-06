@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -euo pipefail  # Exit on error, unset variables, and catch pipe failures
-
 # Check if terminal has been sourced
 # this matters for the cyclonedds compilation as the docs
 # state that the terminal cannot be sourced before compilation
