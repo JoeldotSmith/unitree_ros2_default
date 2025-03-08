@@ -17,6 +17,7 @@ mkdir -p "$SRC_DIR"
 cd "$SRC_DIR"
 
 
+# Get all packages
 # Clone repositories if they don't exist
 # cyclonedds and rmw_cyclonedds are required to run ros on the g1
 if [[ ! -d "$SRC_DIR/rmw_cyclonedds/.git" ]]; then
@@ -35,6 +36,17 @@ else
     echo "cyclonedds already exists, skipping clone"
 fi
 
+
+
+# Optional package
+# comment out if you don't want/need mocopi intergration
+if [[ ! -d "$SRC_DIR/mocopi_ros2/.git" ]]; then
+    echo "Cloning mocopi_ros2..."
+    rm -rf "$SRC_DIR/mocopi_ros2"  # Ensure no remnants
+    git clone --depth=1 https://github.com/JoeldotSmith/mocopi_ros2.git "$SRC_DIR/mocopi_ros2"
+else
+    echo "mocopi_ros2 already exists, skipping clone"
+fi
 
 # Clean old compile
 cd "$REPO_DIR"
