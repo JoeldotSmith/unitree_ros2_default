@@ -38,7 +38,7 @@ fi
 
 
 
-# Optional package
+# Optional packages
 # comment out if you don't want/need mocopi intergration
 if [[ ! -d "$SRC_DIR/mocopi_ros2/.git" ]]; then
     echo "Cloning mocopi_ros2..."
@@ -46,6 +46,13 @@ if [[ ! -d "$SRC_DIR/mocopi_ros2/.git" ]]; then
     git clone --depth=1 https://github.com/JoeldotSmith/mocopi_ros2.git "$SRC_DIR/mocopi_ros2"
 else
     echo "mocopi_ros2 already exists, skipping clone"
+fi
+if [[ ! -d "$SRC_DIR/mocopi_2_unitree/.git" ]]; then
+    echo "Cloning mocopi_2_unitree..."
+    rm -rf "$SRC_DIR/mocopi_2_unitree"  # Ensure no remnants
+    git clone --depth=1 https://github.com/JoeldotSmith/mocopi_2_unitree.git "$SRC_DIR/mocopi_2_unitree"
+else
+    echo "mocopi_2_unitree already exists, skipping clone"
 fi
 
 # Clean old compile
