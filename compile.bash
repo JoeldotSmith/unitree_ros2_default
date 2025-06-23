@@ -1,5 +1,12 @@
 #!/bin/bash
 
+NO_MOCOPI=0
+for arg in "$@"; do
+  if [[ "$arg" == "-no-mocopi" ]]; then
+    NO_MOCOPI=1
+  fi
+done
+
 # Check if terminal has been sourced
 # this matters for the cyclonedds compilation as the docs
 # state that the terminal cannot be sourced before compilation
@@ -43,11 +50,14 @@ clone_repo rmw_cyclonedds https://github.com/ros2/rmw_cyclonedds.git foxy
 clone_repo cyclonedds https://github.com/eclipse-cyclonedds/cyclonedds.git releases/0.10.x
 
 # Optional packages
-# comment out if you don't want/need mocopi intergration
-clone_repo mocopi_ros2 https://github.com/JoeldotSmith/mocopi_ros2.git g1
-clone_repo mocopi_2_unitree https://github.com/JoeldotSmith/mocopi_2_unitree.git
-clone_repo fcl_self_collision_checker https://github.com/JoeldotSmith/fcl_self_collision_checker.git SafetyMargin
-clone_repo g1_pose_follower https://github.com/JoeldotSmith/g1_pose_follower.git
+if [[ "$NO_MOCOPI" -eq 0 ]]; then
+  clone_repo mocopi_ros2 https://github.com/JoeldotSmith/mocopi_ros2.git g1
+  clone_repo mocopi_2_unitree https://github.com/JoeldotSmith/mocopi_2_unitree.git
+  clone_repo fcl_self_collision_checker https://github.com/JoeldotSmith/fcl_self_collision_checker.git SafetyMargin
+  clone_repo g1_pose_follower https://github.com/JoeldotSmith/g1_pose_follower.git
+else
+  echo "Skipping mocopi-related packages"
+fi
 
 # Clean old compile
 cd "$REPO_DIR"
